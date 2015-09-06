@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lighting</title>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+        var webSocket;
+    </script>
+</head>
+<body>
+
+<script>
+    (function(){
+        ws();
+    })();
+    function ws(){
+        webSocket = new WebSocket("wss://"+window.location.hostname+":9000");
+        webSocket.onmessage = function(data){
+            console.log(data.data);
+        }
+        webSocket.onopen = function(event){
+            console.log(event);
+        }
+        webSocket.onclose = function(event){
+            setTimeout(ws,5000);
+        }
+    }
+</script>
+</body>
+</html>
